@@ -1,0 +1,7 @@
+[Plymouth Theme]
+Name=agl logo
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/agl
+ScriptFile=/usr/share/plymouth/themes/agl/agl.script

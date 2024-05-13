@@ -1,0 +1,101 @@
+## Author : Aditya Shakya (adi1090x)
+## Mail : adi1090x@gmail.com
+## Github : @adi1090x
+## Reddit : @adi1090x
+
+// Screen size
+screen.w = Window.GetWidth(0);
+screen.h = Window.GetHeight(0);
+screen.half.w = Window.GetWidth(0) / 2;
+screen.half.h = Window.GetHeight(0) / 2;
+
+// Question prompt
+question = null;
+answer = null;
+
+// Message
+message = null;
+
+// Password prompt
+bullets = null;
+prompt = null;
+bullet.image = Image.Text("*", 1, 1, 1);
+
+// Flow
+state.status = "play";
+state.time = 0.0;
+
+//--------------------------------- Refresh (Logo animation) --------------------------
+
+flyingman_image[0] = Image("agl-logo2_export0000.png");
+flyingman_image[1] = Image("agl-logo2_export0001.png");
+flyingman_image[2] = Image("agl-logo2_export0002.png");
+flyingman_image[3] = Image("agl-logo2_export0003.png");
+flyingman_image[4] = Image("agl-logo2_export0004.png");
+flyingman_image[5] = Image("agl-logo2_export0005.png");
+flyingman_image[6] = Image("agl-logo2_export0006.png");
+flyingman_image[7] = Image("agl-logo2_export0007.png");
+flyingman_image[8] = Image("agl-logo2_export0008.png");
+flyingman_image[9] = Image("agl-logo2_export0009.png");
+flyingman_image[10] = Image("agl-logo2_export0010.png");
+flyingman_image[11] = Image("agl-logo2_export0011.png");
+flyingman_image[12] = Image("agl-logo2_export0012.png");
+flyingman_image[13] = Image("agl-logo2_export0013.png");
+flyingman_image[14] = Image("agl-logo2_export0014.png");
+flyingman_image[15] = Image("agl-logo2_export0015.png");
+flyingman_image[16] = Image("agl-logo2_export0016.png");
+flyingman_image[17] = Image("agl-logo2_export0017.png");
+flyingman_image[18] = Image("agl-logo2_export0018.png");
+flyingman_image[19] = Image("agl-logo2_export0019.png");
+flyingman_image[20] = Image("agl-logo2_export0020.png");
+flyingman_image[21] = Image("agl-logo2_export0021.png");
+flyingman_image[22] = Image("agl-logo2_export0022.png");
+flyingman_image[23] = Image("agl-logo2_export0023.png");
+flyingman_image[24] = Image("agl-logo2_export0024.png");
+flyingman_image[25] = Image("agl-logo2_export0025.png");
+flyingman_image[26] = Image("agl-logo2_export0026.png");
+flyingman_image[27] = Image("agl-logo2_export0027.png");
+flyingman_image[28] = Image("agl-logo2_export0028.png");
+flyingman_image[29] = Image("agl-logo2_export0029.png");
+flyingman_image[30] = Image("agl-logo2_export0030.png");
+flyingman_sprite = Sprite();
+
+# set image position
+flyingman_sprite.SetX(Window.GetX() + (Window.GetWidth(0) / 2 - flyingman_image[0].GetWidth() / 2)); # Place images in the center
+flyingman_sprite.SetY(Window.GetY() + (Window.GetHeight(0) / 2 - flyingman_image[0].GetHeight() / 2));
+
+progress = 0;
+
+fun refresh_callback () {
+    if (progress < 60) {
+        flyingman_sprite.SetImage(flyingman_image[Math.Int(progress/2)].Rotate(4.7124));
+        Window.SetBackgroundTopColor (0, 0, 0);
+        Window.SetBackgroundBottomColor (0, 0, 0);
+    } else {
+        flyingman_sprite.SetImage(flyingman_image[30].Rotate(4.7124));
+        Window.SetBackgroundTopColor (0, 0, 0);
+        Window.SetBackgroundBottomColor (0, 0, 0);
+    }
+    progress++;
+}
+
+Plymouth.SetRefreshFunction (refresh_callback);
+
+//--------------------------- Normal display (unset all text) ----------------------
+fun DisplayNormalCallback() {
+    state.status = "play";
+    bullets = null;
+    prompt = null;
+    message = null;
+    question = null;
+    answer = null;
+}
+Plymouth.SetDisplayNormalFunction(DisplayNormalCallback);
+
+//----------------------------------------- Message --------------------------------
+fun MessageCallback(text) {
+    message.image = Image.Text(text, 1, 1, 1);
+    message.sprite = Sprite(message.image);
+    message.sprite.SetPosition(screen.half.w - message.image.GetWidth() / 2, message.image.GetHeight());
+}
+Plymouth.SetMessageFunction(MessageCallback);
